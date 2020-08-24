@@ -6,11 +6,11 @@
 #
 Name     : lxqt-powermanagement
 Version  : 0.14.1
-Release  : 3
-URL      : https://downloads.lxqt.org/downloads/lxqt-powermanagement/0.14.1/lxqt-powermanagement-0.14.1.tar.xz
-Source0  : https://downloads.lxqt.org/downloads/lxqt-powermanagement/0.14.1/lxqt-powermanagement-0.14.1.tar.xz
-Source99 : https://downloads.lxqt.org/downloads/lxqt-powermanagement/0.14.1/lxqt-powermanagement-0.14.1.tar.xz.asc
-Summary  : LXQt power management daemon
+Release  : 4
+URL      : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.14.1/lxqt-powermanagement-0.14.1.tar.xz
+Source0  : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.14.1/lxqt-powermanagement-0.14.1.tar.xz
+Source1  : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.14.1/lxqt-powermanagement-0.14.1.tar.xz.asc
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: lxqt-powermanagement-bin = %{version}-%{release}
@@ -19,9 +19,14 @@ Requires: lxqt-powermanagement-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : kidletime-dev
+BuildRequires : liblxqt-data
 BuildRequires : liblxqt-dev
 BuildRequires : lxqt-build-tools
+BuildRequires : qtbase-dev
+BuildRequires : qtsvg-dev
 BuildRequires : qttools-dev
+BuildRequires : qtx11extras-dev
+BuildRequires : solid-dev
 
 %description
 # lxqt-powermanagement
@@ -56,24 +61,30 @@ license components for the lxqt-powermanagement package.
 
 %prep
 %setup -q -n lxqt-powermanagement-0.14.1
+cd %{_builddir}/lxqt-powermanagement-0.14.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1551236625
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1598295808
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1551236625
+export SOURCE_DATE_EPOCH=1598295808
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/lxqt-powermanagement
-cp LICENSE %{buildroot}/usr/share/package-licenses/lxqt-powermanagement/LICENSE
+cp %{_builddir}/lxqt-powermanagement-0.14.1/LICENSE %{buildroot}/usr/share/package-licenses/lxqt-powermanagement/7fab4cd4eb7f499d60fe183607f046484acd6e2d
 pushd clr-build
 %make_install
 popd
@@ -141,4 +152,4 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/lxqt-powermanagement/LICENSE
+/usr/share/package-licenses/lxqt-powermanagement/7fab4cd4eb7f499d60fe183607f046484acd6e2d
