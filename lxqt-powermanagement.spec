@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBE793007AD22DF7E (tsujan2000@gmail.com)
 #
 Name     : lxqt-powermanagement
-Version  : 0.15.0
-Release  : 5
-URL      : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.15.0/lxqt-powermanagement-0.15.0.tar.xz
-Source0  : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.15.0/lxqt-powermanagement-0.15.0.tar.xz
-Source1  : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.15.0/lxqt-powermanagement-0.15.0.tar.xz.asc
+Version  : 0.16.0
+Release  : 6
+URL      : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.16.0/lxqt-powermanagement-0.16.0.tar.xz
+Source0  : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.16.0/lxqt-powermanagement-0.16.0.tar.xz
+Source1  : https://github.com/lxqt/lxqt-powermanagement/releases/download/0.16.0/lxqt-powermanagement-0.16.0.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -21,6 +21,7 @@ BuildRequires : buildreq-kde
 BuildRequires : kidletime-dev
 BuildRequires : liblxqt-dev
 BuildRequires : lxqt-build-tools
+BuildRequires : lxqt-globalkeys-dev
 BuildRequires : qtbase-dev
 BuildRequires : qtsvg-dev
 BuildRequires : qttools-dev
@@ -59,15 +60,15 @@ license components for the lxqt-powermanagement package.
 
 
 %prep
-%setup -q -n lxqt-powermanagement-0.15.0
-cd %{_builddir}/lxqt-powermanagement-0.15.0
+%setup -q -n lxqt-powermanagement-0.16.0
+cd %{_builddir}/lxqt-powermanagement-0.16.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1598907352
+export SOURCE_DATE_EPOCH=1604543566
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -80,10 +81,10 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1598907352
+export SOURCE_DATE_EPOCH=1604543566
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/lxqt-powermanagement
-cp %{_builddir}/lxqt-powermanagement-0.15.0/LICENSE %{buildroot}/usr/share/package-licenses/lxqt-powermanagement/7fab4cd4eb7f499d60fe183607f046484acd6e2d
+cp %{_builddir}/lxqt-powermanagement-0.16.0/LICENSE %{buildroot}/usr/share/package-licenses/lxqt-powermanagement/7fab4cd4eb7f499d60fe183607f046484acd6e2d
 pushd clr-build
 %make_install
 popd
@@ -113,6 +114,7 @@ popd
 /usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_fr.qm
 /usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_gl.qm
 /usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_he.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_hr.qm
 /usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_hu.qm
 /usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_id.qm
 /usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_it.qm
