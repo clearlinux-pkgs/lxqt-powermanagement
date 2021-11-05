@@ -6,17 +6,22 @@
 #
 Name     : lxqt-powermanagement
 Version  : 1.0.0
-Release  : 10
+Release  : 11
 URL      : https://github.com/lxqt/lxqt-powermanagement/releases/download/1.0.0/lxqt-powermanagement-1.0.0.tar.xz
 Source0  : https://github.com/lxqt/lxqt-powermanagement/releases/download/1.0.0/lxqt-powermanagement-1.0.0.tar.xz
 Source1  : https://github.com/lxqt/lxqt-powermanagement/releases/download/1.0.0/lxqt-powermanagement-1.0.0.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
+Requires: lxqt-powermanagement-bin = %{version}-%{release}
+Requires: lxqt-powermanagement-data = %{version}-%{release}
+Requires: lxqt-powermanagement-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : kidletime-dev
 BuildRequires : liblxqt-dev
+BuildRequires : lxqt-build-tools
+BuildRequires : lxqt-globalkeys-dev
 BuildRequires : qtbase-dev
 BuildRequires : qtsvg-dev
 BuildRequires : qttools-dev
@@ -27,6 +32,32 @@ BuildRequires : solid-dev
 ## Overview
 This repository is providing tools to monitor power management events and optionally trigger actions like e. g. shut down a system when laptop batteries are low on power.
 
+%package bin
+Summary: bin components for the lxqt-powermanagement package.
+Group: Binaries
+Requires: lxqt-powermanagement-data = %{version}-%{release}
+Requires: lxqt-powermanagement-license = %{version}-%{release}
+
+%description bin
+bin components for the lxqt-powermanagement package.
+
+
+%package data
+Summary: data components for the lxqt-powermanagement package.
+Group: Data
+
+%description data
+data components for the lxqt-powermanagement package.
+
+
+%package license
+Summary: license components for the lxqt-powermanagement package.
+Group: Default
+
+%description license
+license components for the lxqt-powermanagement package.
+
+
 %prep
 %setup -q -n lxqt-powermanagement-1.0.0
 cd %{_builddir}/lxqt-powermanagement-1.0.0
@@ -36,7 +67,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1636129384
+export SOURCE_DATE_EPOCH=1636135064
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -49,7 +80,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1636129384
+export SOURCE_DATE_EPOCH=1636135064
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/lxqt-powermanagement
 cp %{_builddir}/lxqt-powermanagement-1.0.0/LICENSE %{buildroot}/usr/share/package-licenses/lxqt-powermanagement/7fab4cd4eb7f499d60fe183607f046484acd6e2d
@@ -59,3 +90,86 @@ popd
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/lxqt-config-powermanagement
+/usr/bin/lxqt-powermanagement
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/applications/lxqt-config-powermanagement.desktop
+/usr/share/icons/hicolor/scalable/devices/laptop-lid.svg
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_ar.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_arn.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_ast.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_bg.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_ca.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_cs.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_cy.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_da.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_de.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_el.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_es.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_et.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_fi.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_fr.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_gl.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_he.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_hr.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_hu.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_id.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_it.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_ja.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_ko.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_lt.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_nb_NO.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_nl.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_pl.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_pt.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_pt_BR.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_ru.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_si.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_sk_SK.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_tr.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_uk.qm
+/usr/share/lxqt/translations/lxqt-config-powermanagement/lxqt-config-powermanagement_zh_CN.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_ar.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_arn.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_ast.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_bg.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_ca.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_cs.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_cy.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_da.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_de.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_el.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_es.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_et.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_fi.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_fr.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_gl.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_he.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_hr.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_hu.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_id.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_it.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_ja.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_ko.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_lt.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_nb_NO.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_nl.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_pl.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_pt.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_pt_BR.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_ru.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_si.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_sk_SK.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_tr.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_uk.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_vi.qm
+/usr/share/lxqt/translations/lxqt-powermanagement/lxqt-powermanagement_zh_CN.qm
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/lxqt-powermanagement/7fab4cd4eb7f499d60fe183607f046484acd6e2d
